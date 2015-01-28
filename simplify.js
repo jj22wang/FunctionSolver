@@ -18,26 +18,6 @@ function add(x,y)
 	return s;
 }
 
-function subtract(x,y)
-{
-	var s = [];
-	for(var i = 0;  i < x.length || i <y.length; i++)
-	{
-		var add = 0;
-		if(i<x.length)
-		{
-			add+=x[i];
-		}
-		if(i<y.length)
-		{
-			add-=y[i];
-		}
-		s.push(add);
-	}
-
-	return s;
-}
-
 //adds a linear combination of two functions
 function addMultiple(x, a , y , b)
 {
@@ -105,12 +85,11 @@ function interpretOperator(thisGroup, nextGroup, command)
 			return interpretGroup(nextGroup);
 		}
 	}
-
 	if(command == '+')
 	{
 		var i = 0
 		var bracketDifference = 0;
-		while(i<nextGroup.length && nextGroup[i]!= '+' && nextGroup[i]!= '-' && nextGroup[i]!=')' || bracketDifference > 0)
+		while(i<nextGroup.length && nextGroup[i]!= '+' && nextGroup[i]!=')' || bracketDifference > 0)
 		{
 			if(nextGroup[i] == '(')
 				bracketDifference++;
@@ -130,35 +109,11 @@ function interpretOperator(thisGroup, nextGroup, command)
 		}
 	}
 
-	if(command == '-')
-	{
-		var i = 0
-		var bracketDifference = 0;
-		while(i<nextGroup.length && nextGroup[i]!= '+' && nextGroup[i]!= '-'  && nextGroup[i]!=')' || bracketDifference > 0)
-		{
-			if(nextGroup[i] == '(')
-				bracketDifference++;
-			if(nextGroup[i] == ')')
-				bracketDifference--;
-			i++;
-		}
-		if(i==nextGroup.length)
-		{
-			return subtract(thisGroup, interpretGroup(nextGroup));
-		}
-		else
-		{
-			var s = subtract(thisGroup, interpretGroup(nextGroup.substring(0, i)));
-			var s = interpretOperator(s, nextGroup.substring(i+1), nextGroup[i]);
-			return s;
-		}
-	}
-
 	if(command == '*')
 	{
 		var i = 0
 		var bracketDifference = 0;
-		while(i<nextGroup.length && nextGroup[i]!= '+' && nextGroup[i]!= '-'  && nextGroup[i]!=')' && nextGroup[i]!='*' || bracketDifference > 0)
+		while(i<nextGroup.length && nextGroup[i]!= '+' && nextGroup[i]!=')' && nextGroup[i]!='*' || bracketDifference > 0)
 			{
 				if(nextGroup[i] == '(')
 					bracketDifference++;
@@ -182,7 +137,7 @@ function interpretOperator(thisGroup, nextGroup, command)
 	{
 		var i = 0
 		var bracketDifference = 0;
-		while(i<nextGroup.length && nextGroup[i]!= '+' && nextGroup[i]!= '-'  && nextGroup[i]!=')'  && nextGroup[i]!='*' && nextGroup[i]!='^' || bracketDifference > 0)
+		while(i<nextGroup.length && nextGroup[i]!= '+' && nextGroup[i]!=')'  && nextGroup[i]!='*' && nextGroup[i]!='^' || bracketDifference > 0)
 			{
 				if(nextGroup[i] == '(')
 					bracketDifference++;
@@ -220,11 +175,6 @@ function interpretGroup(remainingFunc)
 	}
 
 	var thisGroup = remainingFunc.substring(0,1);
-	if(thisGroup == '-')
-	{
-		return interpretOperator([-1],remainingFunc.substring(1),'*');
-	}
-
 	if(thisGroup == 'x')
 	{
 		thisGroup = [0, 1];
@@ -262,7 +212,6 @@ function interpretGroup(remainingFunc)
 			}
 		}
 	}
-
 	return interpretOperator(thisGroup, remainingFunc.substring(1), remainingFunc[0]);
 }
 
