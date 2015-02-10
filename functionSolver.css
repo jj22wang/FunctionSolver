@@ -1,13 +1,24 @@
 <style type="text/css">
-
-  #header { position: relative; }
-  #header-content { position: absolute; bottom: 0; left: 0; }
   .inner { text-align: center;}
-
-  li.anime:hover li.anime:active{
-      text-decoration: underline;
-      }
-
+  .textinput{ 
+    padding-left: 5px;
+    padding-right: 15px;
+  }
+  .bounds{
+    padding-left: 5px;
+    padding-right: 15px;
+    width : 100px;
+  }
+  .layers{
+    position: absolute; 
+    border : 1px solid #000000;
+    left: 15%; 
+    top: 0;
+  }
+  #equation{
+    text-align: center;
+    color: #878787
+  }
   input{ font-family: serif; color: #878787; background-color: #F4F4F4}
   input[type='button']{
   	color:#198D8D;
